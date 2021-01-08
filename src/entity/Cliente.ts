@@ -1,8 +1,10 @@
-import { BaseEntity, Column, OneToMany } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 import Pedido from "./Pedido";
 
+@Entity("Cliente")
 class Cliente extends BaseEntity {
 	@Column()
+	@PrimaryColumn()
 	cnpj: string;
 
 	@Column()

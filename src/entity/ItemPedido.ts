@@ -1,12 +1,15 @@
-import { BaseEntity, Column, JoinColumn, ManyToOne } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import Item from "./Item";
 import Pedido from "./Pedido";
 
+@Entity("ItemPedido")
 class ItemPedido extends BaseEntity {
 	@Column()
+	@PrimaryColumn()
 	idPedido: string;
 
 	@Column()
+	@PrimaryColumn()
 	idItem: string;
 
 	@Column()

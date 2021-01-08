@@ -1,11 +1,12 @@
-import { BaseEntity, Column, ManyToOne, OneToMany } from "typeorm";
+import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import StatusPedido from "../interfaces/StatusPedido";
 import Cliente from "./Cliente";
 import ItemPedido from "./ItemPedido";
 import Vendedor from "./Vendedor";
-
+@Entity("Pedido")
 class Pedido extends BaseEntity {
 	@Column()
+	@PrimaryColumn()
 	id: string;
 
 	@Column()

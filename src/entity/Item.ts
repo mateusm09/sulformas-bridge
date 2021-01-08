@@ -1,8 +1,10 @@
-import { BaseEntity, Column, OneToMany } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 import ItemPedido from "./ItemPedido";
 
+@Entity("ItemPedido")
 class Item extends BaseEntity {
 	@Column()
+	@PrimaryColumn()
 	id: string;
 
 	@Column()

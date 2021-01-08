@@ -1,8 +1,10 @@
-import { BaseEntity, Column, OneToMany } from "typeorm";
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 import Pedido from "./Pedido";
 
+@Entity("Vendedor")
 class Vendedor extends BaseEntity {
 	@Column()
+	@PrimaryColumn()
 	id: string;
 
 	@Column()
@@ -25,6 +27,9 @@ class Vendedor extends BaseEntity {
 
 	@Column()
 	pais: string;
+
+	@Column()
+	cep: string;
 
 	@OneToMany(() => Pedido, (pedido) => pedido.vendedor)
 	pedidos: Pedido[];

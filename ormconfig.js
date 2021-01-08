@@ -14,9 +14,9 @@ module.exports = [
 		database: process.env.POSTGRES_DB,
 		synchronize: false,
 		logging: false,
-		entities: ["src/entity/**/*.ts"],
-		migrations: ["src/migration/**/*.ts"],
-		subscribers: ["src/subscriber/**/*.ts"],
+		entities: [`${__dirname}/src/entity/**/*.ts`],
+		migrations: [`${__dirname}/src/migration/**/*.ts`],
+		subscribers: [`${__dirname}/src/subscriber/**/*.ts`],
 		cli: {
 			entitiesDir: "src/entity",
 			migrationsDir: "src/migration",
