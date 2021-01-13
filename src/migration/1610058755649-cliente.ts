@@ -7,9 +7,13 @@ export class cliente1610058755649 implements MigrationInterface {
 				name: "Cliente",
 				columns: [
 					{
-						name: "cnpj",
+						name: "id",
 						type: "varchar",
 						isPrimary: true,
+					},
+					{
+						name: "cnpj",
+						type: "varchar",
 					},
 					{
 						name: "nomeFantasia",

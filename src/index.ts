@@ -1,12 +1,13 @@
 import "reflect-metadata";
-import { getAllClients } from "./getters/client.get";
-import { getAllVendors } from "./getters/vendedor.get";
+import { parseClients } from "./csvParsers/client.parser";
+import { parseItems } from "./csvParsers/item.parser";
+
 import { typeormConnection } from "./utils/typeormConnection";
 
 async function main() {
 	try {
-		// await getAllVendors();
-		await getAllClients();
+		// await parseClients();
+		await parseItems();
 	} catch (error) {}
 }
 

@@ -25,17 +25,7 @@ export class pedido1610058743686 implements MigrationInterface {
 					},
 					{
 						name: "status",
-						type: "enum",
-						enum: [
-							"aberto",
-							"aprovado",
-							"preparando_envio",
-							"faturado",
-							"pronto_envio",
-							"enviado",
-							"entregue",
-							"cancelado",
-						],
+						type: "varchar",
 					},
 					{
 						name: "valor",
@@ -51,8 +41,9 @@ export class pedido1610058743686 implements MigrationInterface {
 						isNullable: true,
 					},
 					{
-						name: "CnpjCliente",
+						name: "idCliente",
 						type: "varchar",
+						isNullable: true,
 					},
 				],
 			})

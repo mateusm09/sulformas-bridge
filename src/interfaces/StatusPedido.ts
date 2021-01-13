@@ -3,6 +3,7 @@ type StatusPedido =
 	| "aprovado"
 	| "preparando_envio"
 	| "faturado"
+	| "Faturado"
 	| "pronto_envio"
 	| "enviado"
 	| "entregue"

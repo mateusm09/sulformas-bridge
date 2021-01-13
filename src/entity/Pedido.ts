@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
+import { BaseEntity, Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
 import StatusPedido from "../interfaces/StatusPedido";
 import Cliente from "./Cliente";
 import ItemPedido from "./ItemPedido";
@@ -19,7 +19,7 @@ class Pedido extends BaseEntity {
 	estado: string;
 
 	@Column()
-	status: StatusPedido;
+	status: string;
 
 	@Column()
 	valor: number;
@@ -31,15 +31,17 @@ class Pedido extends BaseEntity {
 	idVendedor: string;
 
 	@Column()
-	CnpjCliente: string;
+	idCliente: string;
 
 	@OneToMany(() => ItemPedido, (itemPedidos) => itemPedidos.pedido)
 	itemPedidos: ItemPedido[];
 
 	@ManyToOne(() => Cliente, (cliente) => cliente.pedidos)
+	@JoinColumn({ name: "idCliente", referencedColumnName: "id" })
 	cliente: Cliente;
 
 	@ManyToOne(() => Vendedor, (vendedor) => vendedor.pedidos)
+	@JoinColumn({ name: "idVendedor", referencedColumnName: "id" })
 	vendedor: Vendedor;
 }
 

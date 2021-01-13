@@ -3,8 +3,8 @@ import { MigrationInterface, QueryRunner, TableForeignKey } from "typeorm";
 export class foreignKeys1610065255549 implements MigrationInterface {
 	public async up(queryRunner: QueryRunner): Promise<void> {
 		const pedidoClienteFK = new TableForeignKey({
-			columnNames: ["CnpjCliente"],
-			referencedColumnNames: ["cnpj"],
+			columnNames: ["idCliente"],
+			referencedColumnNames: ["id"],
 			referencedTableName: "Cliente",
 		});
 
@@ -32,7 +32,7 @@ export class foreignKeys1610065255549 implements MigrationInterface {
 
 	public async down(queryRunner: QueryRunner): Promise<void> {
 		await queryRunner.dropForeignKey("Pedido", "idVendedor");
-		await queryRunner.dropForeignKey("Pedido", "CnpjCliente");
+		await queryRunner.dropForeignKey("Pedido", "idCliente");
 		await queryRunner.dropForeignKey("ItemPedido", "idPedido");
 		await queryRunner.dropForeignKey("ItemPedido", "idItem");
 	}
