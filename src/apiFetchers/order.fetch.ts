@@ -5,10 +5,14 @@ import Cliente from "../entity/Cliente";
 import { Like } from "typeorm";
 import ItemPedido from "../entity/ItemPedido";
 import Item from "../entity/Item";
+import { searchAndSaveClient } from "./client.fetch";
+import { fetchItem } from "./item.fetch";
+import { searchAndSaveVendor } from "./vendor.fetch";
 
 async function saveToDatabase(item: any) {
 	try {
-		let cliente = await Cliente.findOne({ where: { razaoSocial: Like(item.cliente.nome) } });
+		let cliente = await searchAndSaveClient(item.cliente.cpf_cnpj);
+		let vendedor = await searchAndSaveVendor(item.id_vendedor);
 
 		await Pedido.create({
 			id: item.id,
@@ -27,21 +31,7 @@ async function saveToDatabase(item: any) {
 			for (let i = 0; i < itemsList.length; i++) {
 				const it = itemsList[i].item;
 
-				let dbItem = await Item.findOne(it.id_produto);
-				if (!dbItem) {
-					let res = await request("api2/produto.obter.php", { id: it.id });
-					if (res.status_processamento === 2) return;
-
-					dbItem = await Item.create({
-						id: it.id_produto,
-						descricao: res.produto.id,
-						valor: res.produto.preco,
-						categoria: res.produto.categoria,
-						marca: res.produto.marca,
-						subCategoria: "",
-						localizacao: res.produto.localizacao,
-					}).save();
-				}
+				await fetchItem(it.id_produto);
 
 				await ItemPedido.create({
 					idPedido: item.id,
@@ -55,11 +45,9 @@ async function saveToDatabase(item: any) {
 	}
 }
 
-async function createOrUpdateItem(item: any) {}
-
 export async function fetchOrders() {
 	const result = await request("api2/pedidos.pesquisa.php", {
-		dataInicialOcorrencia: moment().subtract(2, "days").format("DD/MM/YYYY"),
+		dataInicialOcorrencia: moment("17/01/2021", "DD/MM/YYYY").subtract(2, "days").format("DD/MM/YYYY"),
 	});
 
 	const ordersList = result.pedidos;

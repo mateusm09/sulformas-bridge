@@ -4,7 +4,7 @@ import { request } from "./base.fetch";
 
 async function saveToDatabase(item: any) {
 	try {
-		await Cliente.create({
+		return Cliente.create({
 			id: item.id,
 			nomeFantasia: item.fantasia,
 			razaoSocial: item.nome,
@@ -23,18 +23,32 @@ async function saveToDatabase(item: any) {
 	}
 }
 
-export async function fetchClients() {
-	const result = await request("api2/contatos.pesquisa.php", {
-		dataCriacao: moment().subtract(2, "day").format("DD/MM/YYYY"),
+export async function fetchClient(id: number) {
+	const result = await request("api2/contato.obter.php", {
+		id,
 	});
 	if (result.status_processamento === 2) throw Error("Error");
 
-	const clientsList = result.contatos;
-	for (let i = 0; i < clientsList.length; i++) {
-		const id = clientsList[i].contato.id;
-		const clientRes = await request("api2/contato.obter.php", { id });
-		if (clientRes.status_processamento === 2) throw Error("Error");
+	return saveToDatabase(result.contato);
 
-		await saveToDatabase(clientRes.contato);
-	}
+	// const clientsList = result.contatos;
+	// for (let i = 0; i < clientsList.length; i++) {
+	// 	const id = clientsList[i].contato.id;
+	// 	const clientRes = await request("api2/contato.obter.php", { id });
+	// 	if (clientRes.status_processamento === 2) throw Error("Error");
+
+	// 	await saveToDatabase(clientRes.contato);
+	// }
+}
+
+export async function searchAndSaveClient(cnpj: string) {
+	const result = await request("api2/contatos.pesquisa.php", {
+		cpf_cnpj: cnpj,
+	});
+	if (result.status_processamento === 2) throw Error("Error");
+
+	// console.log(result);
+
+	const client = result.contatos[0].contato;
+	return fetchClient(client.id);
 }

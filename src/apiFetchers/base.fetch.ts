@@ -7,6 +7,8 @@ let requestCounter = 0;
 export async function request(endpoint: string, data: any) {
 	try {
 		if (requestCounter >= 50) {
+			console.log("need wait 1 minute");
+
 			await waitFor(61 * 1000);
 			requestCounter = 0;
 		}
