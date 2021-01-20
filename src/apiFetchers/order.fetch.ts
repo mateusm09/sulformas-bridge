@@ -24,6 +24,7 @@ async function saveToDatabase(item: any) {
 			numeroNF: "",
 			idCliente: cliente && cliente.id,
 			idVendedor: item.id_vendedor !== "0" ? item.id_vendedor : null,
+			numero: item.numero,
 		}).save();
 
 		if (item.itens) {
@@ -47,7 +48,7 @@ async function saveToDatabase(item: any) {
 
 export async function fetchOrders() {
 	const result = await request("api2/pedidos.pesquisa.php", {
-		dataInicialOcorrencia: moment("17/01/2021", "DD/MM/YYYY").subtract(2, "days").format("DD/MM/YYYY"),
+		dataInicialOcorrencia: moment().format("DD/MM/YYYY"),
 	});
 
 	const ordersList = result.pedidos;

@@ -42,6 +42,7 @@ async function saveToDatabase(row: any) {
 				numeroNF: "",
 				idCliente: cliente.id,
 				idVendedor: vendedor && vendedor.id,
+				numero: row["Número do pedido"],
 			}).save();
 
 			// console.log("vendedor:", row["Vendedor"], "dbVendedor:", vendedor);

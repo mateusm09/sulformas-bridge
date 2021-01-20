@@ -33,6 +33,9 @@ class Pedido extends BaseEntity {
 	@Column()
 	idCliente: string;
 
+	@Column()
+	numero: number;
+
 	@OneToMany(() => ItemPedido, (itemPedidos) => itemPedidos.pedido)
 	itemPedidos: ItemPedido[];
 
