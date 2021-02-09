@@ -5,12 +5,12 @@
 	"devDependencies": {
 		"@types/node": "^8.0.29",
 		"@types/qs": "^6.9.5",
-		"dotenv": "^8.2.0",
 		"ts-node": "3.3.0",
 		"ts-node-dev": "^1.1.1",
 		"typescript": "3.3.3333"
 	},
 	"dependencies": {
+		"dotenv": "^8.2.0",
 		"axios": "^0.21.1",
 		"csv-parser": "^3.0.0",
 		"moment": "^2.29.1",
@@ -21,6 +21,7 @@
 	},
 	"scripts": {
 		"start": "ts-node-dev --inspect=0.0.0.0:5001 --no-notify --respawn --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/index.ts src/index.ts ",
+		"fetch": "ts-node src/fetch.ts",
 		"build": "tsc",
 		"migrate": "ts-node ./node_modules/typeorm/cli.js migration:run"
 	}
