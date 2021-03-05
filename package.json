@@ -22,6 +22,7 @@
 	"scripts": {
 		"start": "ts-node-dev --inspect=0.0.0.0:5001 --no-notify --respawn --transpile-only --ignore-watch node_modules -r tsconfig-paths/register src/index.ts src/index.ts ",
 		"fetch": "ts-node src/fetch.ts",
+        "populate": "ts-node src/populate.ts",
 		"build": "tsc",
 		"migrate": "ts-node ./node_modules/typeorm/cli.js migration:run"
 	}
